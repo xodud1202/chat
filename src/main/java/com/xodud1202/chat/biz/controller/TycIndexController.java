@@ -7,10 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class TycIndexController extends TycBaseController {
-	@GetMapping("/")
+	@GetMapping({"/", "/friends/list/form"})
 	public ModelAndView mainForm() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mainForm");
+		mav.setViewName("friends/friendsListForm");
 		return mav;
 	}
 }

@@ -5,18 +5,17 @@
 
 <head th:replace="~{common/fragments/Header :: header}"></head>
 
-<body>
-<div id="wrapper" class="col-lg-6 col-md-8 col-sm-12" style="float:none;margin:auto;min-height:100vh;">
-	<!-- GNB -->
-	<div th:replace="~{common/fragments/Gnb :: gnb}"></div>
-	<!--// GNB -->
+<body class="col-lg-6 col-md-8 col-sm-12">
+	<div id="wrapper">
+		<!-- GNB -->
+		<div th:replace="~{common/fragments/Gnb :: gnb}"></div>
+		<!--// GNB -->
 
-	<!-- CONTENT AREA -->
-	<div>
+		<!-- CONTENT AREA -->
 		<th:block layout:fragment="content"></th:block>
+		<!-- // CONTENT AREA -->
 	</div>
-	<!-- // CONTENT AREA -->
-</div>
-<th:block th:replace="~{common/fragments/LastBody :: lastBody}"></th:block>
+	<th:block th:replace="~{common/fragments/LastBody :: lastBody}"></th:block>
+	<th:block th:replace="~{common/fragments/Footer :: footer}"></th:block>
 </body>
 </html>

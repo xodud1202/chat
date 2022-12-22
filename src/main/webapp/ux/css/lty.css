@@ -1,0 +1,16 @@
+/* 공통 */
+body {min-height:100vh !important; padding:0 !important;}
+footer {width:100%;position: fixed; bottom:0;}
+body, footer {float:none !important;margin:auto;padding:0;}
+#container {width:100%; padding:0;}
+
+/* GNB */
+#gnbNavBar {display:flex;width:100%;position:sticky;color:white;flex-wrap:wrap;padding:0;min-height:unset;border:unset;margin-bottom:0;}
+#gnbNavBar .navMenu {font-size:3rem;display:flex;align-items:center;justify-content:center;flex-basis: 0;flex-grow:1;height:5vh;border-right:1px solid white;}
+#gnbNavBar .navMenu.on {background-color:#eeeeee;color:black;}
+
+/* Footer */
+#footerBar {display:flex;width:100%;position:absolute;color:white;bottom:0;flex-wrap:wrap;padding:0;min-height:unset;border:unset;margin-bottom:0;}
+#footerBar .footerMenu {font-size:3rem;display:flex;align-items:center;justify-content:center;flex-basis: 0;flex-grow:1;height:5vh;border-right:1px solid white;}
+#footerBar .footerMenu.on {background-color:#eeeeee !important;color:black;}
+#footerBar .footerMenu:hover {background-color:#555555;cursor:pointer;}

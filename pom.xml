@@ -10,13 +10,15 @@
 	</parent>
 	<groupId>com.xodud1202</groupId>
 	<artifactId>chat</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>chat</name>
 	<description>chat</description>
+
 	<properties>
 		<java.version>11</java.version>
+		<skipTests>true</skipTests>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
