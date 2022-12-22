@@ -1,0 +1,5 @@
+spring:
+    thymeleaf:
+        check-template-location: true
+        prefix: /WEB-INF/views/
+        suffix: .html

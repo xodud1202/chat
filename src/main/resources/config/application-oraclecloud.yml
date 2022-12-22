@@ -1,0 +1,47 @@
+---
+spring.config.active.on-profile: oraclecloud
+spring.prifiles.active: oraclecloud
+spring.main.allow-bean-definition-overriding: true
+logging.config: classpath:log/logback-run.xml
+
+domain:
+    chat: //chat.xodud1202.kro.kr
+    image: //image.xodud1202.kro.kr/publist/HDD1/Media/nas/upload/common
+
+nas:
+    ftp:
+        host: xodud1202.ipdisk.co.kr
+        port: 5021
+        username: xodud1202
+        pwd: tmd1202wls
+        upload.path: /HDD1/Media/nas/upload/common
+
+upload:
+    dext.target.path: /HDD1/Media/nas/upload/common/temp
+    default:
+        target.path: /HDD1/Media/nas/upload/common/temp
+        max.size: 10
+        allow.extension: jpg|gif|jpeg|png|bmp|txt|doc|docx|ppt|pptx|xls|xlsx|hwp|pdf|mp4
+        view: //image.xodud1202.kro.kr/publist/HDD1/Media/nas/upload/common
+    goods:
+        target.path: /HDD1/Media/nas/upload/common/temp
+        max.size: 10
+        allow.extension: jpg|gif|jpeg|png
+        view: //image.xodud1202.kro.kr/publist/HDD1/Media/nas/upload/common
+    image:
+        target.path: /HDD1/Media/nas/upload/common/temp
+        max.size: 10
+        allow.extension: jpg|gif|jpeg|png
+        view: //image.xodud1202.kro.kr/publist/HDD1/Media/nas/upload/common
+    excel:
+        target.path: /HDD1/Media/nas/upload/common/temp
+        max.size: 10
+        allow.extension: xls|xlsx
+        view: //image.xodud1202.kro.kr/publist/HDD1/Media/nas/upload/common
+    sample:
+        target.path: /HDD1/Media/nas/upload/common/temp
+        max.size: 10
+        allow.extension: txt|doc|docx|ppt|pptx|xls|xlsx|hwp|pdf
+        view: //image.xodud1202.kro.kr/publist/HDD1/Media/nas/upload/common
+
+download.path: /HDD1/Media/nas/upload/common

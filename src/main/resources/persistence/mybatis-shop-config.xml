@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" /> <!-- 설정에서 각 매퍼에 설정된 캐시를 전역적으로 사용할지 말지에 대한 여부 (default true)-->
+		<!-- <setting name="lazyLoadingEnabled" value="true" /> --> <!-- 지연로딩을 사용할지에 대한 여부. 사용하지 않는다면 모두 즉시 로딩 (default true) -->
+		<!-- <setting name="multipleResultSetsEnabled" value="true" /> --> <!-- 한개의 구문에서 여러개의 ResultSet을 허용할지의 여부 (default true) -->
+		<setting name="useGeneratedKeys" value="true" /> <!-- 생성키를 강제로 생성 (default false) -->
+		<setting name="defaultExecutorType" value="REUSE" /> <!-- 디폴트 실행자(executor) 설정. PreparedStatement를 재사용 (default SIMPLE)-->
+		<setting name="defaultStatementTimeout" value="60" /> <!-- 데이터베이스로의 응답을 얼마나 오래 기다릴지를 판단하는 타임아웃(초)를 설정 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 데이터베이스 칼럼명 형태인 A_COLUMN을 CamelCase 형태의 자바 프로퍼티명 형태인 aColumn으로 자동으로 매핑하도록 함 (default false) -->
+		<setting name="logImpl" value="NO_LOGGING" /> <!-- 마이바티스가 사용할 로깅 구현체를 명시. 이 설정을 사용하지 않으면 마이바티스가 사용할 로깅 구현체를 자동으로 찾는다. -->
+		<setting name="jdbcTypeForNull" value="NULL"/> <!-- JDBC 타입을 파라미터에 제공하지 않을 때 null 값을 처리한 JDBC 타입을 명시 -->
+		<setting name="callSettersOnNulls" value="true"/> <!-- 가져온 값이 null일때 setter나 맵의 put 메소드를 호출할지를 명시 (default false) -->
+		<setting name="returnInstanceForEmptyRow" value="true"/> <!-- 모든 컬럼이 null이면 row를 null 인스턴스로 리턴 (default false: row를 null로 리턴) -->
+	</settings>
+</configuration>
