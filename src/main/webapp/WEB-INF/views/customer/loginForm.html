@@ -20,10 +20,12 @@
 <th:block layout:fragment="content">
 <div id="container" class="loginFormDiv">
 	<form id="loginForm" name="loginForm" action="/login">
-		<div>
+		<div class="loginLogo"><i class="fa fa-users" aria-hidden="true"></i></div>
+		<div class="loginInfo">
 			<input type="text" placeholder="고객 아이디" /><br/>
 			<input type="password" placeholder="비밀번호" /><br/>
-			<input type="button" value="로그인" />
+			<input type="button" class="loginFormBtn loginBtn" value="로그인" /><br/>
+			<input type="button" class="loginFormBtn joinBtn" value="회원가입" />
 		</div>
 	</form>
 </div>

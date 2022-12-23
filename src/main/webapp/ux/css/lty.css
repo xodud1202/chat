@@ -16,7 +16,12 @@ body, footer {float:none !important;margin:auto;padding:0;}
 #footerBar .footerMenu:hover {background-color:#555555;cursor:pointer;}
 
 /* 로그인, 회원가입폼 */
-.loginFormDiv {height:100vh; background-color:#c3c3e2;}
+.loginFormDiv {height:100vh; background-color:#c3c3e2; display: table;}
+.loginFormDiv #loginForm {width: 100%;display: table-cell;vertical-align: middle;}
+.loginFormDiv #loginForm>div {text-align: center;}
+.loginFormDiv #loginForm .loginLogo {font-size: 10rem; position: absolute;top:10rem;width:100%;}
+.loginFormDiv #loginForm .loginInfo .loginFormBtn {font-size:2rem; font-weight: bold;}
+.loginFormDiv #loginForm .loginInfo > input {width:60%;height:5rem; margin-bottom: 0.5rem;}
 
 /* friendListForm */
 #friendListForm ul {padding:0;}
