@@ -19,9 +19,42 @@
 <body>
 <th:block layout:fragment="content">
 <div id="container" class="container main">
-	<div class="mainContainer">
-		<span>friendsList</span>
-	</div>
+	<form id="friendListForm" name="friendListForm">
+		<div>
+			<input type="text" name="searchInput" placeholder="검색 ID를 입력하세요"/>
+			<input type="button" name="friendSearchBtn" value="검색" />
+		</div>
+		<ul>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+			<li class="friends">
+				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
+				<span class="friends-id">sksksk1001</span>
+			</li>
+		</ul>
+	</form>
 </div>
 <script th:inline="javascript">
 	$(document).ready(function() {

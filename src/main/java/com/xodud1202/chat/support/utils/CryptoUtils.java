@@ -11,12 +11,12 @@ import java.io.UnsupportedEncodingException;
 /**
  * 암호화 Util Class
  * @author xodud1202
- * @since 2022.12.22
+ * @since  2022.12.22
  */
 @Slf4j
 public class CryptoUtils {
-	// AES키
-	private static final String AES_KEY = "xodud1202ChatAesKey!";
+	// AES키 (다른 프로젝트와 같은 테이블 데이터를 사용해야하므로 AES_KEY 통일)
+	private static final String AES_KEY = "zmfltmahf202201!";
 
 	/**
 	 * JAVA에서는 AES키는 16byte이지만, MySQL에서는 16byte 이상도 지원하기에 MySQL의 16byte 이상의 키를 생성해야 한다.

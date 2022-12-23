@@ -1,6 +1,7 @@
 package com.xodud1202.chat.support.controller;
 
 import com.xodud1202.chat.biz.domain.Login;
+import com.xodud1202.chat.support.security.TycSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -48,7 +49,9 @@ public class TycBaseController {
 	 */
 	@ModelAttribute("sessionInfo")
 	public Login getSession() {
-		return null;
-//		return TyfSession.getInfo();
+		Login info = new Login();
+		info.setCustId(TycSession.getAttribute("custId"));
+		info.setCustNm(TycSession.getAttribute("custNm"));
+		return info;
 	}
 }

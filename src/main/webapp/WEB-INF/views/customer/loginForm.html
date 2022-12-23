@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/BeforeLoginLayout}">
+<!--
+ *******************************************************************************
+ * @source  : loginForm.html
+ * @desc	: 로그인 화면
+ *============================================================================
+ * xodud1202.chat
+ * Copyright(C) 2022 xodud1202, All rights reserved.
+ *============================================================================
+ * VER  DATE		 AUTHOR	  DESCRIPTION
+ * ===  ===========  ==========  =============================================
+ * 1.0  2022.12.23   xodud1202	 최초 작성
+ *******************************************************************************
+ -->
+<body>
+<th:block layout:fragment="content">
+<div id="container" class="loginFormDiv">
+	<form id="loginForm" name="loginForm" action="/login">
+		<div>
+			<input type="text" placeholder="고객 아이디" /><br/>
+			<input type="password" placeholder="비밀번호" /><br/>
+			<input type="button" value="로그인" />
+		</div>
+	</form>
+</div>
+<script th:inline="javascript">
+	$(document).ready(function() {
+		// alert([[${sessionInfo.custNm}]]);
+	});
+</script>
+</th:block>
+
+</body>
+</html>
