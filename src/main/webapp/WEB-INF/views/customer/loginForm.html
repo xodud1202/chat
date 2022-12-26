@@ -19,17 +19,40 @@
 <body>
 <th:block layout:fragment="content">
 <div id="container" class="loginFormDiv">
-	<form id="loginForm" name="loginForm" action="/login">
+	<form id="loginForm" name="loginForm" action="/login" method="post">
 		<div class="loginLogo"><i class="fa fa-users" aria-hidden="true"></i></div>
 		<div class="loginInfo">
-			<input type="text" placeholder="고객 아이디" /><br/>
-			<input type="password" placeholder="비밀번호" /><br/>
-			<input type="button" class="loginFormBtn loginBtn" value="로그인" /><br/>
+			<input type="text" name="username" placeholder="고객 아이디" /><br/>
+			<input type="password" name="password" placeholder="비밀번호" /><br/>
+			<input type="button" class="loginFormBtn loginBtn" onclick="login();" value="로그인" /><br/>
 			<input type="button" class="loginFormBtn joinBtn" value="회원가입" />
 		</div>
 	</form>
 </div>
 <script th:inline="javascript">
+	const fnLoginCallBack = (result) => {
+		console.log(result);
+		alert(result.username + " / " + result.password);
+	}
+	const login = () => {
+		if(isEmpty(document.loginForm.username.value.trim())) {
+			alert("아이디를 입력해주세요.");
+			return false;
+		} else if (isEmpty(document.loginForm.password.value)) {
+			alert("비밀번호를 입력해주세요.")
+			return false;
+		}
+
+		// document.loginForm.submit();
+
+		const loginInfo = {
+			username : document.loginForm.username.value.trim(),
+			password : document.loginForm.password.value
+		}
+
+		ltyJsonFetch("POST", document.loginForm.action, loginInfo, fnLoginCallBack)
+	}
+
 	$(document).ready(function() {
 		// alert([[${sessionInfo.custNm}]]);
 	});

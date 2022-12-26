@@ -2,8 +2,10 @@ package com.xodud1202.chat.biz.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.xodud1202.chat.support.security.Password;
 import com.xodud1202.chat.support.utils.CryptoUtils;
 import lombok.Data;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 고객 Domain
@@ -11,17 +13,17 @@ import lombok.Data;
  * @author xodud1202
  * @since  2022.12.22
  */
-@SuppressWarnings("serial")
 @Data
-@JsonSerialize
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Login extends BaseDomain {
+@SuppressWarnings("serial")
+public class Login {
 
 	// 세션을 JSON 형식으로 레디스에 저장하려면 기본 생성자를 반드시 명시해야 한다
 	public Login() {}
 
 	private String custId;			// 고객ID
 	private String custNm;			// 고객명
+	private String username;
+	private String password;
 	private String pwd;				// 비밀번호
 	private String custGrade;		// 고객등급
 	private String cellPhone;		// 휴대전화번호
@@ -49,4 +51,9 @@ public class Login extends BaseDomain {
 		return this.email;
 	}
 	// 암호화 대상 복호화 처리 =================================================
+
+	// 로그인 패스워드 암호화
+	public String encryptSha512(String pwd) {
+		return Password.encryptSha512(pwd);
+	}
 }

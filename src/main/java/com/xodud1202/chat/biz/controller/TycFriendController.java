@@ -11,14 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/friend")
 public class TycFriendController extends TycBaseController {
-	@GetMapping("/list/form")
+	@GetMapping("/list")
 	public ModelAndView friendListForm() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("friends/friendsListForm");
 		return mav;
 	}
 
-	@GetMapping("/search/form")
+	@GetMapping("/search")
 	public ModelAndView customerSearchForm() {
 		ModelAndView mav = new ModelAndView();
 		// mav.setViewName("friends/friendsListForm");
