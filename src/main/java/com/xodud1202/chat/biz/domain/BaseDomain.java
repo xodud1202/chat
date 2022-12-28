@@ -13,7 +13,7 @@ import lombok.Data;
 @SuppressWarnings("serial")
 public class BaseDomain {
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private String regId;
+	private Integer regNo;
 
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private String regNm;

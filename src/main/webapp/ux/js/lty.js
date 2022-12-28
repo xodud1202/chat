@@ -3,7 +3,7 @@
  * @param   val
  * @returns boolean
  */
-const isEmpty = (val) => {
+const isNull = (val) => {
     return val === undefined || val == null || val.length <= 0;
 }
 
@@ -23,8 +23,6 @@ const ltyJsonFetch = (method, url, param, callbackFn) => {
             method: method,
             headers: {'Content-Type': 'application/json;', "Accept": 'application/json'},
 			body: JSON.stringify(param)
-			/*headers: {'Content-Type': 'application/json;'},*/
-            /*body: param*/
         }
     }
 
@@ -36,3 +34,51 @@ const ltyJsonFetch = (method, url, param, callbackFn) => {
 		console.error("Error : ", error);
 	});
 }
+
+/**
+ * 특수문자 존재 여부 체크 (특수문자가 존재하면 return true)
+ * @param str 검색할 문자열
+ */
+const fnCheckSpecialChar = (str) => {
+	return /[^a-zA-Z0-9]/gi.test(str);
+}
+
+/**
+ * 영문입력체크 (영문 존재시 return true)
+ * @param str 검색할 문자열
+ */
+const fnValidtaionEng = (str) => {
+	return /[a-zA-Z]/ig.test(str);
+};
+
+/**
+ * 숫자포함체크 (숫자 포함시 return true)
+ * @param str 검색할 문자열
+ */
+const fnValidtaionNumber = (str) => {
+	return /[0-9]/g.test(str);
+};
+
+/**
+ * 특수문자포함체크 (특수문자 포함시 Return true)
+ * @param str 검색할 문자열
+ */
+const fnValidtaionSpecialChar = (str) => {
+	return /[!@#$%^&*()?_~]/g.test(str);
+};
+
+/**
+ * 고객 패스워드 길이 확인 ( 8 - 20자 이내면 true )
+ * @param password - 패스워드
+ */
+const fnValidationPwdLength = (password) => {
+	return /^[a-zA-Z0-9!@#$%^&*()?_~]{8,20}$/.test(password);
+};
+
+/**
+ * 이메일 유효성 체크 (정상 return true)
+ * @param email - 이메일
+ */
+const fnCheckValidationEmail = (email) => {
+	return /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/.test(email);
+};

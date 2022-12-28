@@ -2,7 +2,41 @@
 body {min-height:100vh !important; padding:0 !important;}
 footer {width:100%;position: fixed; bottom:0;}
 body, footer {float:none !important;margin:auto;padding:0;}
+ul {padding-left: 0px;}
+li {list-style:none;display:inline-block;margin:0.5rem;padding-left:0px;}
 #container {width:100%; padding:0;}
+.inputPadding {padding-left: 2rem; padding-right: 2rem;}
+.backBlack {background-color:black;}
+.form-check-input {width:1.5rem; height:1.5rem;}
+.form-check-label {font-size:1.5rem;}
+.row {margin-left:0px; margin-right:0px;}
+.inlineBlock {display:inline-block;}
+.mt1r {margin-top:1rem;}
+.mt2r {margin-top:2rem;}
+.mb1r {margin-bottom:1rem;}
+.mb2r {margin-bottom:2rem;}
+.mr1r {margin-right:1rem;}
+.mr2r {margin-right:2rem;}
+.ml1r {margin-left:1rem;}
+.ml2r {margin-left:2rem;}
+.pt1r {padding-top:1rem;}
+.pt2r {padding-top:2rem;}
+.pb1r {padding-bottom:1rem;}
+.pb2r {padding-bottom:2rem;}
+.pr1r {padding-right:1rem;}
+.pr2r {padding-right:2rem;}
+.pl1r {padding-left:1rem;}
+.pl2r {padding-left:2rem;}
+.borderTop1px {border-top:1px solid white;}
+.borderBottom1px {border-bottom:1px solid white;}
+.borderRight1px {border-Right:1px solid white;}
+.borderLeft1px {border-Left:1px solid white;}
+.floatUnset {float:unset;}
+.floatRight {float:right;}
+.floatLeft {float:left;}
+.text-center {text-align: center !important;}
+.verticalMiddle {vertical-align: middle !important;}
+.width100 {width:100%;}
 
 /* GNB */
 #gnbNavBar {display:flex;width:100%;position:sticky;color:white;flex-wrap:wrap;padding:0;min-height:unset;border:unset;margin-bottom:0;}
@@ -17,14 +51,22 @@ body, footer {float:none !important;margin:auto;padding:0;}
 
 /* 로그인, 회원가입폼 */
 .loginFormDiv {height:100vh; background-color:#c3c3e2; display: table;}
-.loginFormDiv #loginForm {width: 100%;display: table-cell;vertical-align: middle;}
-.loginFormDiv #loginForm>div {text-align: center;}
-.loginFormDiv #loginForm .loginLogo {font-size: 10rem; position: absolute;top:10rem;width:100%;}
-.loginFormDiv #loginForm .loginInfo .loginFormBtn {font-size:2rem; font-weight: bold;}
-.loginFormDiv #loginForm .loginInfo > input {width:60%;height:5rem; margin-bottom: 0.5rem;}
+#loginForm {width: 100%;display: table-cell;vertical-align: middle;}
+#loginForm>div {text-align: center;}
+#loginForm .loginLogo {font-size: 10rem; position: absolute;top:10rem;width:100%;}
+#loginForm .loginInfo .loginFormBtn {font-size:2rem; font-weight: bold;}
+#loginForm .loginInfo > input {width:60%;height:5rem; margin-bottom: 0.5rem;}
+#joinForm {width:100%; min-height: 100vh; background-color:#c3c3e2;}
+#joinForm > div {display: flex;}
+#joinForm > div > div {display:inline-flex; justify-content: center;}
+#joinForm .red {color: red;}
+#joinForm .skyblue {color: deepskyblue;}
+#joinForm .validation-list > li {display: inline-block;}
+#joinForm .el-icon-check:before {content:"\2713"}
+#joinForm #btnJoin {background-color: white; margin-bottom: 5rem;}
 
 /* friendListForm */
 #friendListForm ul {padding:0;}
-#friendListForm .friends {list-style:none;height:5rem;display:flex;align-items:center;}
+#friendListForm .friends {height:5rem;display:flex;align-items:center;}
 #friendListForm .friends .friends-profile {width:4rem;height:4rem;}
 #friendListForm .friends .friends-id {margin-left: 2rem;}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xodud1202.chat.biz.dao.TycCustomerDao">
+	<!-- 공통코드 목록 조회 -->
+	<select id="getCustomerIdCount" parameterType="Customer" resultType="int">
+		/* TycCustomer.getCustomerIdCount : 고객 아이디 존재 여부 체크 */
+		SELECT COUNT(1) AS COUNT
+		FROM   TB_CUST CT
+		WHERE  CUST_ID = #{custId}
+	</select>
+</mapper>
