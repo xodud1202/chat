@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/friend")
 public class TycFriendController extends TycBaseController {
-	@GetMapping("/list")
+	@GetMapping("/list/form")
 	public ModelAndView friendListForm() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("friends/friendsListForm");

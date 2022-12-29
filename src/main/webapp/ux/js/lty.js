@@ -1,3 +1,15 @@
+const URL_MAIN = "/";
+const URL_JOIN = "/customer/join/{custId}";
+const URL_JOIN_FORM = "/customer/join/form";
+const URL_LOGIN_FORM = "/customer/login/form";
+const URL_FRIEND_LIST_FORM = "/friend/list/form";
+
+const POST = "POST";
+const GET = "GET";
+const PUT = "PUT";
+const DELETE = "DELETE";
+
+
 /**
  * DATA NULL CHECK (비어있거나 없는 데이터는 return false)
  * @param   val
@@ -65,14 +77,6 @@ const fnValidtaionNumber = (str) => {
  */
 const fnValidtaionSpecialChar = (str) => {
 	return /[!@#$%^&*()?_~]/g.test(str);
-};
-
-/**
- * 고객 패스워드 길이 확인 ( 8 - 20자 이내면 true )
- * @param password - 패스워드
- */
-const fnValidationPwdLength = (password) => {
-	return /^[a-zA-Z0-9!@#$%^&*()?_~]{8,20}$/.test(password);
 };
 
 /**

@@ -22,7 +22,7 @@ public class BaseDomain {
 	private String regDt;
 
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private String udtId;
+	private Integer udtNo;
 
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private String udtNm;

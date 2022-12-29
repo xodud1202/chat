@@ -20,7 +20,7 @@ public class TycIndexController extends TycBaseController {
 	@GetMapping("/")
 	public void mainForm(HttpServletResponse response) throws IOException {
 		if(TycSession.isLogin()) {
-			response.sendRedirect("/friend/list/form");
+			response.sendRedirect("/friend/list");
 		}
 		response.sendRedirect("/customer/login/form");
 	}

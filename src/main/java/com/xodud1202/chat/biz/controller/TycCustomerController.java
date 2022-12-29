@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/customer")
+@RequestMapping(path = "/customer")
 public class TycCustomerController extends TycBaseController {
 	@Autowired
 	TycCustomerService customerService;
@@ -35,7 +35,7 @@ public class TycCustomerController extends TycBaseController {
 	 * @author xodud1202
 	 * @since 2022.12.28
 	 */
-	@GetMapping("/join")
+	@GetMapping("/join/form")
 	public ModelAndView joinForm() {
 		ModelAndView mav = new ModelAndView();
 		//이용약관
@@ -64,11 +64,13 @@ public class TycCustomerController extends TycBaseController {
 	 * @author xodud1202
 	 * @since 2022.12.28
 	 */
-	@PostMapping("/info")
-	public Map<String, Object> createCustomerInfo(@RequestBody Customer param) {
+	@PostMapping(path = "/join/{custId}")
+	public Map<String, Object> createCustomerInfo(@RequestBody Customer param, @PathVariable String custId) {
 		Map<String, Object> result = new HashMap<>();
-		// TODO xodud1202 회원가입 로직 추가 필요
-		result.put("isJoin", true);
+		result.put("isJoin", false);
+		if(customerService.createCustomerInfo(param) > 0) {
+			result.put("isJoin", true);
+		}
 
 		return result;
 	}

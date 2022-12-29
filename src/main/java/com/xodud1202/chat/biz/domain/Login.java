@@ -51,9 +51,4 @@ public class Login {
 		return this.email;
 	}
 	// 암호화 대상 복호화 처리 =================================================
-
-	// 로그인 패스워드 암호화
-	public String encryptSha512(String pwd) {
-		return Password.encryptSha512(pwd);
-	}
 }

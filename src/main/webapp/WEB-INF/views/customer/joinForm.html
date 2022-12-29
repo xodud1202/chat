@@ -43,11 +43,10 @@
 			<div class="col-md-12 floatUnset">
 				<div class="col-md-6 inputPadding displayBlock marginAuto floatUnset">
 					<input type="password" class="form-control" name="pwd" id="pwd" minlength="8" maxlength="20" required="required" placeholder="비밀번호" title="비밀번호"/>
-					<button type="button" class="btn-lock-toggle"></button>
+					<button type="button" id="btn-lock-toggle" class="btn-lock-toggle"></button>
 					<ul class="validation-list" data-id="pwd">
-						<li data-name="english"><span>영문포함</span><i class="el-icon-check"></i></li>
-						<li data-name="number"><span>숫자포함</span><i class="el-icon-check"></i></li>
-						<li data-name="symbol"><span>특수문자포함(!@#$%^&*()?_~)</span><i class="el-icon-check"></i></li>
+						<li data-name="pwdValid"><span>영어/숫자/특수문자(!@#$%^&*()?_~)포함</span><i class="el-icon-check"></i></li>
+						<li data-name="cantUseSymbol"><span>사용불가문자</span><i class="el-icon-check"></i></li>
 						<li data-name="length"><span>8자 이상</span><i class="el-icon-check"></i></li>
 					</ul>
 				</div>
@@ -118,7 +117,7 @@
 				<div class="col-md-6 inputPadding pt2r pb1r borderTop1px displayBlock marginAuto floatUnset">
 					<div class="mb1r">서비스 약관에 동의해주세요</div>
 					<div class="form-check inlineBlock">
-						<input class="form-check-input" type="checkbox" id="ta0" onclick="chkBoxAllCheck(this,'ckGroup1')">
+						<input class="form-check-input policyAllCheckBox" type="checkbox" id="ta0" onclick="chkBoxAllCheck(this,'ckGroup1')">
 						<label class="form-check-label" for="ta0">
 							<strong>모두 동의</strong>
 							<span>(선택 정보 포함)</span>
@@ -126,7 +125,7 @@
 					</div>
 					<div id="ckGroup1" class="pl2r">
 						<div class="form-check" data-id="age">
-							<input class="form-check-input" type="checkbox" name="chkPolicies1" id="chkPolicies1">
+							<input class="form-check-input policyCheckBox" type="checkbox" name="chkPolicies1" id="chkPolicies1">
 							<label class="form-check-label" for="chkPolicies1">
 								[필수] 만 14세 이상
 							</label>
@@ -136,7 +135,7 @@
 						</div>
 
 						<div class="form-check" data-id="term">
-							<input class="form-check-input" type="checkbox" name="chkPolicies2" id="chkPolicies2">
+							<input class="form-check-input policyCheckBox" type="checkbox" name="chkPolicies2" id="chkPolicies2">
 							<label class="form-check-label" for="chkPolicies2">
 								[필수] 이용약관 동의<a href="javascript:void(0);" onclick="fnPopupOpen('term');" data-bs-toggle="modal" data-bs-target="#layerPopup">보기</a>
 							</label>
@@ -146,7 +145,7 @@
 						</div>
 
 						<div class="form-check" data-id="privacy">
-							<input class="form-check-input" type="checkbox" name="chkPolicies3" id="chkPolicies3">
+							<input class="form-check-input policyCheckBox" type="checkbox" name="chkPolicies3" id="chkPolicies3">
 							<label class="form-check-label" for="chkPolicies3">
 								[필수] 개인정보 처리방침 동의<a href="javascript:void(0);" onclick="fnPopupOpen('privacy');" data-bs-toggle="modal" data-bs-target="#layerPopup">보기</a>
 							</label>
@@ -246,41 +245,33 @@
 		let isValidCustId = true;
 
 		if(!isNull(pwd)) {
-			const $valiEngElement = $passwordParent.querySelector(".validation-list li[data-name=english]");
-			const $valiNumberElement = $passwordParent.querySelector(".validation-list li[data-name=number]");
-			const $valiSpecialCharElement = $passwordParent.querySelector(".validation-list li[data-name=symbol]");
+			const $pwdValidElement = $passwordParent.querySelector(".validation-list li[data-name=pwdValid]");
+			const $pwdCantUseSymbol = $passwordParent.querySelector(".validation-list li[data-name=cantUseSymbol]");
 			const $valiLengthElement = $passwordParent.querySelector(".validation-list li[data-name=length]");
 
-			//2-1.영문포함
-			if(fnValidtaionEng(pwd)) {
-				$valiEngElement.classList.add("skyblue");
-				$valiEngElement.classList.remove("red");
+			//2-1.영어/숫자/특수문자(!@#$%^&*()?_~)포함
+			if(fnValidtaionEng(pwd) && fnValidtaionNumber(pwd) && fnValidtaionSpecialChar(pwd)) {
+				$pwdValidElement.classList.add("skyblue");
+				$pwdValidElement.classList.remove("red");
 			}else{
 				isValidCustId = false;
-				$valiEngElement.classList.add("red");
-				$valiEngElement.classList.remove("skyblue");
-			}
-			//2-2.숫자포함
-			if(fnValidtaionNumber(pwd)) {
-				$valiNumberElement.classList.add("skyblue");
-				$valiNumberElement.classList.remove("red");
-			}else{
-				isValidCustId = false;
-				$valiNumberElement.classList.add("red");
-				$valiNumberElement.classList.remove("skyblue");
-			}
-			//2-3.특수문자
-			if(fnValidtaionSpecialChar(pwd)) {
-				$valiSpecialCharElement.classList.add("skyblue");
-				$valiSpecialCharElement.classList.remove("red");
-			}else{
-				isValidCustId = false;
-				$valiSpecialCharElement.classList.add("red");
-				$valiSpecialCharElement.classList.remove("skyblue");
+				$pwdValidElement.classList.add("red");
+				$pwdValidElement.classList.remove("skyblue");
 			}
 
-			//2-4.길이 ( 8-20자 )
-			if(fnValidationPwdLength(pwd)) {
+			// 2-2 사용불가문자 존재 여부 체크
+			// /[a-zA-Z0-9!@#$%^&*()?_~]/
+			if(/[^a-zA-Z0-9!@#$%^&*()?_~]/.test(pwd)) {
+				isValidCustId = false;
+				$pwdCantUseSymbol.classList.add("red");
+				$pwdCantUseSymbol.classList.remove("skyblue");
+			} else {
+				$pwdCantUseSymbol.classList.add("skyblue");
+				$pwdCantUseSymbol.classList.remove("red");
+			}
+
+			//2-3.길이 ( 8-20자 )
+			if(pwd.length > 7 && pwd.length < 21) {
 				$valiLengthElement.classList.add("skyblue");
 				$valiLengthElement.classList.remove("red");
 			}else{
@@ -386,9 +377,8 @@
 		if(fnGetCheckClass('custId', 'length', 'red')) errorCnt++;
 		if(fnGetCheckClass('custId', 'symbol', 'red')) errorCnt++;
 		// 패스워드 확인
-		if(fnGetCheckClass('pwd', 'english','red')) errorCnt++;
-		if(fnGetCheckClass('pwd', 'number', 'red')) errorCnt++;
-		if(fnGetCheckClass('pwd', 'symbol', 'red')) errorCnt++;
+		if(fnGetCheckClass('pwd', 'pwdValid','red')) errorCnt++;
+		if(fnGetCheckClass('pwd', 'cantUseSymbol', 'red')) errorCnt++;
 		if(fnGetCheckClass('pwd', 'length', 'red')) errorCnt++;
 		// 이메일 확인
 		if($('#email').hasClass('value_invalid')) errorCnt++;
@@ -416,11 +406,11 @@
 	//회원가입 처리
 	const fnJoinMember = () => {
 		if(confirm("회원가입을 하시겠습니까?")) {
-			document.getElementById("btnJoin").disabled = true;
+			// document.getElementById("btnJoin").disabled = true;
 			const customerInfo = {
 				custId : document.joinForm.custId.value,
 				pwd : document.joinForm.pwd.value,
-				custNm : document.joinForm.custNm,
+				custNm : document.joinForm.custNm.value,
 				cellPhone : document.joinForm.cellPhone.value,
 				email : document.joinForm.email.value,
 				sexType : document.joinForm.querySelector("input[type=radio][name=sexType]:checked").value,
@@ -428,8 +418,7 @@
 				smsRecvYn : document.joinForm.smsRecvYn.checked ? "Y" : "N"
 			}
 
-
-			ltyJsonFetch("POST", "/customer/info", customerInfo, fnJoinSaveCallback);
+			ltyJsonFetch(POST, URL_JOIN.replace("{custId}", customerInfo.custId), customerInfo, fnJoinSaveCallback);
 		}
 	}
 
@@ -507,6 +496,38 @@
 		const chkPolicies3 = document.joinForm.chkPolicies3;
 		chkPolicies3.addEventListener("change", () => {
 			if(chkPolicies3.checked) chkPolicies3.parentElement.querySelector("li[data-name=privacy]").style.display = "none";
+		});
+
+		// 비밀번호 노출 버튼 클릭 이벤트
+		const $togglePwdBtn = document.getElementById("btn-lock-toggle");
+		$togglePwdBtn.addEventListener("click", () => {
+			if($togglePwdBtn.classList.contains("on")) {
+				$togglePwdBtn.classList.remove("on");
+				document.joinForm.pwd.type = "password";
+			} else {
+				$togglePwdBtn.classList.add("on");
+				document.joinForm.pwd.type = "text";
+			}
+		});
+
+		// 약관 동의 체크박스 클릭 이벤트
+		const $policyCheckBoxs = document.getElementsByClassName("policyCheckBox");
+		Array.from($policyCheckBoxs).forEach(item => {
+			item.addEventListener("change", () => {
+				// 체크 여부에 따른 필수 항목 체크 메세지 노출
+				if(item.checked) {
+					item.parentElement.querySelector("ul>li").style.display = "none";
+				} else {
+					item.parentElement.querySelector("ul>li").style.display = "block";
+				}
+
+				// 전체 선택되어있는지에 따라 모두 동의 체크박스 체크처리
+				if(item.parentElement.parentElement.querySelectorAll(".policyCheckBox:checked").length < document.joinForm.querySelectorAll(".policyCheckBox").length) {
+					document.joinForm.querySelector(".policyAllCheckBox[type=checkbox]").checked = false;
+				} else {
+					document.joinForm.querySelector(".policyAllCheckBox[type=checkbox]").checked = true;
+				}
+			});
 		});
 	});
 	/*]]>*/

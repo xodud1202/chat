@@ -26,7 +26,7 @@ public class TycSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// 정적인 파일에 대한 요청들
     private static final String[] AUTH_WHITELIST = {
-            "/image/**", "/ux/**"
+            "/images/**", "/ux/**"
     };
 
 	@Override
@@ -38,9 +38,9 @@ public class TycSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 				.and()
 				.formLogin()
-				.loginPage("/customer/login")
-				.successForwardUrl("/customer/login")
-				.failureForwardUrl("/customer/login")
+				.loginPage("/customer/login/form")
+				.successForwardUrl("/customer/login/form")
+				.failureForwardUrl("/customer/login/form")
 		;
     }
 

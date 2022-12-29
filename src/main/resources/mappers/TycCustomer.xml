@@ -8,4 +8,57 @@
 		FROM   TB_CUST CT
 		WHERE  CUST_ID = #{custId}
 	</select>
+
+	<insert id="insertCust" parameterType="Customer" useGeneratedKeys="true" keyProperty="custNo">
+		/* TycCustomer.insertCustn : 고객 정보 둥록 */
+		INSERT INTO TB_CUST (
+		       CUST_ID
+		     , CUST_NM
+		     , EMAIL
+		     , PWD
+		     , CELL_PHONE
+		     , SEX_TYPE
+		     , MAIL_RECV_YN
+		     , MAIL_RECV_DT
+		     , SMS_RECV_YN
+		     , SMS_RECV_DT
+		     , CUST_GRADE
+		     , CUST_GRADE_UDT_DT
+		     , JOIN_DT
+		     , ACCESS_DT
+		     , REG_NO
+		     , REG_DT
+		     , UDT_NO
+		     , UDT_DT
+		) VALUES (
+		       #{custId}
+		     , #{custNm}
+		     , #{email}
+		     , #{pwd}
+		     , #{cellPhone}
+		     , #{sexType}
+		     , #{mailRecvYn}
+		     , CASE WHEN #{mailRecvYn} = 'Y' THEN NOW() END
+		     , #{smsRecvYn}
+		     , CASE WHEN #{smsRecvYn} = 'Y' THEN NOW() END
+		     , 'G110_10'
+		     , NOW()
+		     , NOW()
+		     , NOW()
+		     , 0
+		     , NOW()
+		     , 0
+		     , NOW()
+		)
+	</insert>
+
+	<!-- 등록 고객 번호 custNo로 지정 -->
+	<update id="updateTbCustRegNo" parameterType="Customer">
+		/* TycCustomer.updateTbCustRegNo : 등록 고객 번호 custNo로 지정 */
+		UPDATE TB_CUST SET
+		       REG_NO = #{regNo}
+		     , UDT_NO = #{udtNo}
+		     , UDT_DT = NOW()
+		WHERE  CUST_NO = #{custNo}
+	</update>
 </mapper>
