@@ -61,4 +61,17 @@
 		     , UDT_DT = NOW()
 		WHERE  CUST_NO = #{custNo}
 	</update>
+
+	<select id="getLoginIdInfo" parameterType="Login" resultType="Login">
+		/* TycCustomer.getLoginIdInfo : 로그인 아이디 정보 조회 */
+		SELECT CUST_NO
+		     , CUST_ID
+		     , CUST_ID AS USERNAME
+		     , PWD
+		     , PWD AS PASSWORD
+		     , CUST_NM
+		     , CUST_GRADE
+		FROM   TB_CUST CT
+		WHERE  CUST_ID = #{custId}
+	</select>
 </mapper>

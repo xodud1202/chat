@@ -28,7 +28,7 @@ const isNull = (val) => {
  */
 const ltyJsonFetch = (method, url, param, callbackFn) => {
     let headers;
-    if(method === "GET") {
+    if(method === GET) {
         headers = {method: method};
     } else {
         headers = {
@@ -39,7 +39,7 @@ const ltyJsonFetch = (method, url, param, callbackFn) => {
     }
 
 	fetch(url, headers).then(res => res.json()).then(result => {
-		if (typeof(callbackFn) == "function") {
+		if (typeof callbackFn === "function") {
 			callbackFn.call(this, result);
 		}
 	}).catch((error) => {
@@ -59,7 +59,7 @@ const fnCheckSpecialChar = (str) => {
  * 영문입력체크 (영문 존재시 return true)
  * @param str 검색할 문자열
  */
-const fnValidtaionEng = (str) => {
+const fnValidationEng = (str) => {
 	return /[a-zA-Z]/ig.test(str);
 };
 
@@ -67,7 +67,7 @@ const fnValidtaionEng = (str) => {
  * 숫자포함체크 (숫자 포함시 return true)
  * @param str 검색할 문자열
  */
-const fnValidtaionNumber = (str) => {
+const fnValidationNumber = (str) => {
 	return /[0-9]/g.test(str);
 };
 
@@ -75,7 +75,7 @@ const fnValidtaionNumber = (str) => {
  * 특수문자포함체크 (특수문자 포함시 Return true)
  * @param str 검색할 문자열
  */
-const fnValidtaionSpecialChar = (str) => {
+const fnValidationSpecialChar = (str) => {
 	return /[!@#$%^&*()?_~]/g.test(str);
 };
 

@@ -1,0 +1,21 @@
+### tosspay 정산 데이터 조회 (정산일자 기준)
+POST https://pay.toss.im/pay/api/v2/settlement-details
+Content-Type: application/json
+
+{
+  "apiKey": "sk_test_Bz2lqvz4NpBz2lDEAe2p",
+  "dateType": "DUE",
+  "baseDate": "20230405"
+}
+
+
+### tosspay 정산 데이터 조회 (결제일자 기준)
+POST https://pay.toss.im/pay/api/v2/settlement-details
+Content-Type: application/json
+
+{
+  "apiKey": "sk_test_Bz2lqvz4NpBz2lDEAe2p",
+  "dateType": "SETTLE",
+  "baseDate": "20230405"
+}
+

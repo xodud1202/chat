@@ -2,7 +2,9 @@ package com.xodud1202.chat.biz.service;
 
 import com.xodud1202.chat.biz.dao.TycCustomerDao;
 import com.xodud1202.chat.biz.domain.Customer;
+import com.xodud1202.chat.biz.domain.Login;
 import com.xodud1202.chat.support.env.TycConstants;
+import com.xodud1202.chat.support.security.LoginInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +73,11 @@ public class TycCustomerService {
 	 */
 	public int insertCust(Customer param) {
 		return customerDao.insertCust(param);
+	}
+
+	public Login loadUserByUsername(String username) {
+		Login param = new Login();
+		param.setCustId(username);
+		return customerDao.getLoginIdInfo(param);
 	}
 }

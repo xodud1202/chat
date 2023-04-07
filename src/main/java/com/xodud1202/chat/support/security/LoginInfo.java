@@ -1,35 +1,44 @@
 package com.xodud1202.chat.support.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.xodud1202.chat.biz.domain.Login;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
- * 고객 Domain
- * @JsonSerialize 애노테이션을 지정해야 세션을 레디스에 저장할 수 있다.
+ * Customer Login Domain
+ * The @JsonSerialize annotation must be specified to store the session in Redis.
  * @author xodud1202
  * @since  2022.12.22
  */
 @Data
+@JsonSerialize
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginInfo implements UserDetails {
-	private Login user;
+	Login user;
 
-    public LoginInfo(Login user) {
-        this.user = user;
-    }
+	public LoginInfo() {
+		this.user = new Login();
+	}
+
+	public LoginInfo(Login user) {
+		this.user = user;
+	}
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return this.user.getUsername();
     }
 
     //계정이 만료되지 않았는지 리턴 (true: 만료안됨)
@@ -59,11 +68,6 @@ public class LoginInfo implements UserDetails {
     //계정이 갖고있는 권한 목록은 리턴
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        Collection<GrantedAuthority> collectors = new ArrayList<>();
-        collectors.add(() -> {
-            return "ROLE_USER";
-        });
-        return collectors;
+        return Collections.singleton(new SimpleGrantedAuthority("USER"));
     }
 }

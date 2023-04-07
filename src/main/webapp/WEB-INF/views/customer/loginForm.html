@@ -39,18 +39,16 @@
 			alert("아이디를 입력해주세요.");
 			return false;
 		} else if (isNull(document.loginForm.password.value)) {
-			alert("비밀번호를 입력해주세요.")
+			alert("비밀번호를 입력해주세요.");
 			return false;
 		}
-
-		// document.loginForm.submit();
 
 		const loginInfo = {
 			username : document.loginForm.username.value.trim(),
 			password : document.loginForm.password.value
 		}
-
-		ltyJsonFetch("POST", document.loginForm.action, loginInfo, fnLoginCallBack)
+		console.log(loginInfo);
+		ltyJsonFetch("POST", document.loginForm.action, loginInfo, fnLoginCallBack);
 	}
 
 	$(document).ready(function() {

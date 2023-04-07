@@ -7,27 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class TycAuthenticationProvider implements AuthenticationProvider {
+
 	@Autowired
 	private TycLoginService loginService;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();		// 비밀번호 암호화 Bean
 		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken)  authentication;
 		String custId = token.getName();
 		String pwd = (String) token.getCredentials();
+		LoginInfo user = loginService.loadUserByUsername(custId);
 
-		LoginInfo user = (LoginInfo) loginService.loadUserByUsername(custId);
 		if(user == null) {
-			log.info("가입된 정보가 없는 계정입니다.");
-
+			throw new IllegalStateException("ID가 존재하지 않습니다.");
+		} else if (!bCryptPasswordEncoder.matches(pwd, user.getPassword())) {
+			throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
 		}
 
-		return new UsernamePasswordAuthenticationToken(user, pwd, user.getAuthorities());
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("USER"));
+		// return new UsernamePasswordAuthenticationToken(user.getUser().getCustNo(), pwd, authorities);
+		return new UsernamePasswordAuthenticationToken(custId, pwd, authorities);
 	}
 
 	@Override

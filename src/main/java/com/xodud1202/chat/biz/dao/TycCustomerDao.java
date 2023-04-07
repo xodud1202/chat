@@ -1,6 +1,7 @@
 package com.xodud1202.chat.biz.dao;
 
 import com.xodud1202.chat.biz.domain.Customer;
+import com.xodud1202.chat.biz.domain.Login;
 import com.xodud1202.chat.support.annotaion.xodudDs;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,9 @@ public interface TycCustomerDao {
 	int insertCust(Customer param);
 
 	void updateTbCustRegNo(Customer param);
+
+	/**
+	 * 회원 정보 조회
+	 */
+	Login getLoginIdInfo(Login param);
 }

@@ -250,7 +250,7 @@
 			const $valiLengthElement = $passwordParent.querySelector(".validation-list li[data-name=length]");
 
 			//2-1.영어/숫자/특수문자(!@#$%^&*()?_~)포함
-			if(fnValidtaionEng(pwd) && fnValidtaionNumber(pwd) && fnValidtaionSpecialChar(pwd)) {
+			if(fnValidationEng(pwd) && fnValidationNumber(pwd) && fnValidationSpecialChar(pwd)) {
 				$pwdValidElement.classList.add("skyblue");
 				$pwdValidElement.classList.remove("red");
 			}else{
@@ -511,8 +511,8 @@
 		});
 
 		// 약관 동의 체크박스 클릭 이벤트
-		const $policyCheckBoxs = document.getElementsByClassName("policyCheckBox");
-		Array.from($policyCheckBoxs).forEach(item => {
+		const $policyCheckBoxes = document.getElementsByClassName("policyCheckBox");
+		Array.from($policyCheckBoxes).forEach(item => {
 			item.addEventListener("change", () => {
 				// 체크 여부에 따른 필수 항목 체크 메세지 노출
 				if(item.checked) {

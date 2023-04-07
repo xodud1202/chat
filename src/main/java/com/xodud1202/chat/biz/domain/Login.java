@@ -1,11 +1,7 @@
 package com.xodud1202.chat.biz.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.xodud1202.chat.support.security.Password;
 import com.xodud1202.chat.support.utils.CryptoUtils;
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 고객 Domain
@@ -20,6 +16,7 @@ public class Login {
 	// 세션을 JSON 형식으로 레디스에 저장하려면 기본 생성자를 반드시 명시해야 한다
 	public Login() {}
 
+	private Integer custNo;		// 고객번호
 	private String custId;			// 고객ID
 	private String custNm;			// 고객명
 	private String username;
