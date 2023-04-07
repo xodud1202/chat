@@ -26,9 +26,18 @@ public class TycAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
+		// fetch를 통해 application/json 형태로 데이터를 받았을 경우
 		LoginInfo loginRequest = new LoginInfo(objectMapper.readValue(request.getInputStream(), Login.class));
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
 			loginRequest.getUsername(), loginRequest.getPassword());
+
+		/* submit으로 /login 요청을 보냈을 경우
+		// Get the username and password from the request parameters
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password); */
+
+		authRequest.setDetails(loginRequest);		// Set the LoginInfo object as the details of the authRequest
 		return getAuthenticationManager().authenticate(authRequest);
 	}
 

@@ -50,8 +50,7 @@ public class TycSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.loginProcessingUrl("/login")
 				.loginPage("/customer/login/form")
-				.successForwardUrl("/customer/login/form")
-				.failureForwardUrl("/customer/login/form")
+				.successForwardUrl("/")
 		.and().logout()
 		.and().addFilterBefore(tycAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}

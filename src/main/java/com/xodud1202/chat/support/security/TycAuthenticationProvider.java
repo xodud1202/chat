@@ -38,8 +38,7 @@ public class TycAuthenticationProvider implements AuthenticationProvider {
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("USER"));
-		// return new UsernamePasswordAuthenticationToken(user.getUser().getCustNo(), pwd, authorities);
-		return new UsernamePasswordAuthenticationToken(custId, pwd, authorities);
+		return new UsernamePasswordAuthenticationToken(user.getUser().getCustNo(), pwd, authorities);
 	}
 
 	@Override

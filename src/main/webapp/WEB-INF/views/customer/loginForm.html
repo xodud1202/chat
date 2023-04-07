@@ -31,8 +31,7 @@
 </div>
 <script th:inline="javascript">
 	const fnLoginCallBack = (result) => {
-		console.log(result);
-		alert(result.username + " / " + result.password);
+		document.location.href = result.returnUrl;
 	}
 	const login = () => {
 		if(isNull(document.loginForm.username.value.trim())) {
@@ -42,6 +41,9 @@
 			alert("비밀번호를 입력해주세요.");
 			return false;
 		}
+
+		/*document.loginForm.username.value = document.loginForm.username.value.trim();
+		document.loginForm.submit();*/
 
 		const loginInfo = {
 			username : document.loginForm.username.value.trim(),
