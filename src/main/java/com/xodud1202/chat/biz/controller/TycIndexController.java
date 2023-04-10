@@ -19,9 +19,13 @@ public class TycIndexController extends TycBaseController {
 
 	@GetMapping("/")
 	public void mainForm(HttpServletResponse response) throws IOException {
+		log.info("Session check ::: {}", TycSession.isLogin());
+		log.info("Session check ::: {}", TycSession.getInfo());
 		if(TycSession.isLogin()) {
-			response.sendRedirect("/friend/list");
+			response.sendRedirect("/friend/list/form");
+			return;
 		}
+
 		response.sendRedirect("/customer/login/form");
 	}
 }

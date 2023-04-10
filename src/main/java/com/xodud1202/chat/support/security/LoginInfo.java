@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.xodud1202.chat.biz.domain.Login;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,10 @@ public class LoginInfo implements UserDetails {
 
 	public LoginInfo(Login user) {
 		this.user = user;
+	}
+
+    public boolean isLogin() {
+		return StringUtils.isNotBlank(user.getCustId()) ? true : false;
 	}
 
     @Override

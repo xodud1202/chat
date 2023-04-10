@@ -2,6 +2,7 @@ package com.xodud1202.chat.support.config;
 
 import com.xodud1202.chat.biz.service.TycLoginService;
 import com.xodud1202.chat.support.filter.TycAuthenticationFilter;
+import com.xodud1202.chat.support.handler.TycLoginFailHandler;
 import com.xodud1202.chat.support.handler.TycLoginSuccessHandler;
 import com.xodud1202.chat.support.security.TycAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class TycSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-    private TycAuthenticationProvider tycAuthenticationProvider;
+	private TycAuthenticationProvider tycAuthenticationProvider;
 
 	// 정적인 파일에 대한 요청들
-    private static final String[] AUTH_WHITELIST = {
-            "/images/**", "/ux/**"
-    };
+	private static final String[] AUTH_WHITELIST = {
+			"/images/**", "/ux/**"
+	};
 
 	public TycSecurityConfig(TycAuthenticationProvider tycAuthenticationProvider) {
 		this.tycAuthenticationProvider = tycAuthenticationProvider;
@@ -51,6 +52,7 @@ public class TycSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login")
 				.loginPage("/customer/login/form")
 				.successForwardUrl("/")
+				.failureForwardUrl("/customer/login/form")
 		.and().logout()
 		.and().addFilterBefore(tycAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
@@ -65,42 +67,41 @@ public class TycSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new TycLoginService();
 	}
 
-	// 시큐리티가 대신 로그인해주는데 password를 가로채는데
-	// 해당 password가 뭘로 해쉬화해서 회원가입이 되었는지 알아야
-	// 같은 해쉬로 암호화해서 DB에 있는 해쉬랑 비교가능
-	/*@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(loginService).passwordEncoder(encodePWD());
-	}*/
 	@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(tycAuthenticationProvider);
-    }
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(tycAuthenticationProvider);
+	}
 
 	@Override
-    public void configure(WebSecurity web) throws Exception {
-        // 정적인 파일 요청에 대해 무시
-        web.ignoring().antMatchers(AUTH_WHITELIST);
-    }
+	public void configure(WebSecurity web) throws Exception {
+		// 정적인 파일 요청에 대해 무시
+		web.ignoring().antMatchers(AUTH_WHITELIST);
+	}
 
 	@Bean
 	public TycAuthenticationFilter tycAuthenticationFilter() throws Exception {
 		TycAuthenticationFilter authenticationFilter = new TycAuthenticationFilter();
 		authenticationFilter.setFilterProcessesUrl("/login");
 		authenticationFilter.setAuthenticationSuccessHandler(loginSuccessHandler());
+		authenticationFilter.setAuthenticationFailureHandler(loginFailHandler());
 		authenticationFilter.setAuthenticationManager(authenticationManagerBean());
 		authenticationFilter.afterPropertiesSet();
 		return authenticationFilter;
 	}
 
 	@Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
 	@Bean
 	public TycLoginSuccessHandler loginSuccessHandler() {
 		return new TycLoginSuccessHandler();
+	}
+
+	@Bean
+	public TycLoginFailHandler loginFailHandler() {
+		return new TycLoginFailHandler();
 	}
 }

@@ -5,12 +5,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +33,12 @@ public class TycAuthenticationProvider implements AuthenticationProvider {
 		String pwd = (String) token.getCredentials();
 		LoginInfo user = loginService.loadUserByUsername(custId);
 
-		if(user == null) {
-			throw new IllegalStateException("ID가 존재하지 않습니다.");
+		if(user == null || user.getUser() == null) {
+			log.info("provider ID가 존재하지 않습니다.");
+			throw new UsernameNotFoundException("ID가 존재하지 않습니다.");
 		} else if (!bCryptPasswordEncoder.matches(pwd, user.getPassword())) {
-			throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
+			log.info("provider 비밀번호가 일치하지 않습니다.");
+			throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
 		}
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();

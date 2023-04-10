@@ -1,6 +1,8 @@
 package com.xodud1202.chat.support.security;
 
+import com.xodud1202.chat.biz.domain.Login;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -9,6 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class TycSession {
+	/**
+	 * Get Session Info.
+	 *
+	 * @return 세션 정보
+	 */
+	public static Login getInfo() {
+		LoginInfo loginDetails = (LoginInfo)RequestContextHolder.currentRequestAttributes().getAttribute("session", RequestAttributes.SCOPE_SESSION);
+
+		if (loginDetails == null) {
+			return null;
+		}
+
+		return loginDetails.getUser();
+	}
+
 	private static HttpServletRequest getHttpServletRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
@@ -17,9 +34,24 @@ public class TycSession {
         return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
-	public static boolean isLogin() {
+	/*public static boolean isLogin() {
 		HttpSession session = getHttpServletRequest().getSession(true);
 		return StringUtils.isNotBlank((String) session.getAttribute("custId"));
+	}*/
+
+	/**
+	 * 로그인 여부
+	 *
+	 * @return true/false
+	 */
+	public static boolean isLogin() {
+		LoginInfo loginDetails = (LoginInfo) RequestContextHolder.currentRequestAttributes().getAttribute("session", RequestAttributes.SCOPE_SESSION);
+
+		if (loginDetails == null) {
+			return false;
+		}
+
+		return loginDetails.isLogin();
 	}
 
 	public static String getAttribute(String key) {
