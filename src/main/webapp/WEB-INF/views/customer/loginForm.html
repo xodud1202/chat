@@ -31,7 +31,17 @@
 </div>
 <script th:inline="javascript">
 	const fnLoginCallBack = (result) => {
-		document.location.href = result.returnUrl;
+		if(result.status === "OK") {
+			document.location.href = result.returnUrl;
+		} else if(result.status === "NOT_CUST_ID") {
+			alert("없는 계정입니다.");
+		} else if (result.status === "NOT_MATCH_PWD") {
+			alert("비밀번호가 일치하지 않습니다.");
+		} else if (result.status === "ETC_ERROR") {
+			alert("로그인이 실패했습니다. 관리자에 문의해주세요.");
+		} else {
+			alert("관리자에 문의해주세요.");
+		}
 	}
 	const login = () => {
 		if(isNull(document.loginForm.username.value.trim())) {
@@ -42,14 +52,11 @@
 			return false;
 		}
 
-		/*document.loginForm.username.value = document.loginForm.username.value.trim();
-		document.loginForm.submit();*/
-
 		const loginInfo = {
 			username : document.loginForm.username.value.trim(),
 			password : document.loginForm.password.value
 		}
-		console.log(loginInfo);
+
 		ltyJsonFetch("POST", document.loginForm.action, loginInfo, fnLoginCallBack);
 	}
 
