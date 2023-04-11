@@ -19,19 +19,21 @@
 <body>
 <th:block layout:fragment="content">
 <div id="container" class="container main">
-	<form id="friendListForm" name="friendListForm">
-		<div>
+	<form id="friendListForm" name="friendListForm" style="padding:2.5vw;">
+		<div style="text-align:right; font-size:x-large; padding-right:1vw;">
 			<i class="fa fa-user-plus" aria-hidden="true"></i>
+			<i class="fa fa-search" aria-hidden="true" style="margin-left:2%;"></i>
 		</div>
-		<div>
-			<input type="text" name="searchInput" placeholder="검색 ID를 입력하세요"/>
-			<input type="button" name="friendSearchBtn" value="검색" />
-		</div>
+		<!--<div>
+			<input type="text" name="searchInput" placeholder="검색 ID를 입력하세요" style="width:80%;" />
+			<input type="button" name="friendSearchBtn" value="검색" style="width:19%;float:right;" />
+		</div>-->
 		<ul>
 			<li class="friends">
 				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
 				<span class="friends-id">sksksk1001</span>
 			</li>
+			<hr style="margin:unset;"/>
 			<li class="friends">
 				<span><img src="/images/no.png" alt="" class="friends-profile"/></span>
 				<span class="friends-id">sksksk1001</span>

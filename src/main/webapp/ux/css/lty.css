@@ -44,6 +44,10 @@ li {list-style:none;display:inline-block;margin:0.5rem;padding-left:0px;}
 #layerAlert .modal-footer {display:block; text-align:center;}
 #layerAlert .modal-footer .btn {width:20%;}
 
+/* 기본 배경 */
+#wrapper {background-image: url(/images/backgroundImage.jpg);background-size:cover;background-position: center center;min-height: 100vh;}
+#wrapper::before {content:"";position:absolute;top:0;left:0;background-color:rgba(0, 0, 0, 0.3);background-filter(10px);}
+
 /* 비밀번호 표시 아이콘 */
 .btn-lock-toggle{background:url(/images/ico/ico-lock.png) no-repeat center center;width:5rem;height:5rem;overflow:hidden;border:0;position:absolute;right:2.5rem;top:0;}
 .btn-lock-toggle.on{background:url(/images/ico/ico-unlock.png) no-repeat center center;}
